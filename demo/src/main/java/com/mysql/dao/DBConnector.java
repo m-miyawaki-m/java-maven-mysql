@@ -8,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class DBConnector {
@@ -36,19 +38,22 @@ public class DBConnector {
     }
 
     // テーブル「dev_history」から値を取得するためのメソッド
-    public static void getHistory() throws SQLException {
+    public static List<String> getHistory() throws SQLException {
         Connection connection = getConnection();
+        List<String> history = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT sampleinput FROM dev_history");
 
             while (resultSet.next()) {
                 String sampleInput = resultSet.getString("sampleinput");
+                history.add(sampleInput);
                 System.out.println(sampleInput);
             }
         } finally {
             connection.close();
         }
+        return history;
     }
 
 }
