@@ -24,7 +24,7 @@ public class AppTest {
         // DBConnector dbConnector = mock(DBConnector.class);
         // when(dbConnector.getHistory()).thenReturn(expected);
 
-        List<String> actual = DBConnector.getHistory();
+        List<String> actual = DBConnector.getHistoryList();
         try{
             assertEquals(expected, actual);         
         } catch (AssertionError e) {
@@ -45,7 +45,7 @@ public class AppTest {
         // DBConnector dbConnector = mock(DBConnector.class);
         // when(dbConnector.getHistory()).thenReturn(expected);
 
-        List<String> actual = DBConnector.getHistory();
+        List<String> actual = DBConnector.getHistoryList();
         assertEquals(expected, actual);         
     }
 }

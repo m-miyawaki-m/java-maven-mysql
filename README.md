@@ -22,3 +22,8 @@ unzip /workspaces/java-mysql/demo/work/demo-1.0-SNAPSHOT.jar -d /workspaces/java
 ls /workspaces/java-mysql/demo/work/unpacked/WEB-INF/lib/
 ```
 
+### jarファイルが増えすぎないよう
+```
+# 5つ以上のjarファイルが配置されている場合、古いverから削除していく
+chmod +x /workspaces/java-mysql/demo/src/main/resources/scripts/clean_old_jars.sh
+```

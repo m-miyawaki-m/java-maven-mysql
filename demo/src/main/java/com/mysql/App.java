@@ -13,7 +13,8 @@ public class App
     {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            DBConnector.getHistory();
+            DBConnector.getHistoryList();
+            DBConnector.getHistorySampleDataDTOs();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

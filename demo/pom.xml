@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.mysql</groupId>
@@ -26,9 +26,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <version>8.0.33</version>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.33</version>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
@@ -50,66 +50,115 @@
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.2.4</version>
         <executions>
-           <execution>
-              <phase>package</phase>
-              <goals>
-                  <goal>shade</goal>
-              </goals>
-              <configuration>
-                  <createDependencyReducedPom>false</createDependencyReducedPom>
-                  <transformers>
-                      <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                          <mainClass>com.mysql.App</mainClass> <!-- ここにメインクラスの完全修飾名を指定します -->
-                      </transformer>
-                  </transformers>
-                  <artifactSet>
-                    <excludes><!--依存関係が除外-->
-                        <exclude>mysql-connector-java</exclude>
-                        <exclude>protobuf-java</exclude>
-                    </excludes>
-                  </artifactSet>
-              </configuration>
-           </execution>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>com.mysql.App</mainClass>                  <!-- ここにメインクラスの完全修飾名を指定します -->
+                </transformer>
+              </transformers>
+              <artifactSet>
+                <excludes>                  <!--依存関係が除外-->
+                  <exclude>mysql-connector-java</exclude>
+                  <exclude>protobuf-java</exclude>
+                </excludes>
+              </artifactSet>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
-
+      <!-- resourceフォルダからファイルを配置する場合に利用していた -->
+      <!--
+      <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.2.0</version>
+          <executions>
+              <execution>
+                  <id>copy-resources</id>
+                  <phase>validate</phase>
+                  <goals>
+                      <goal>copy-resources</goal>
+                  </goals>
+                  <configuration>
+                      <outputDirectory>${project.build.directory}</outputDirectory>
+                      <resources>
+                          <resource>
+                              <directory>src/main/resources/scripts</directory>
+                              <includes>
+                                  <include>clean_old_jars.sh</include>
+                              </includes>
+                          </resource>
+                      </resources>
+                  </configuration>
+              </execution>
+          </executions>
+      </plugin>
+      -->
+      <!-- ビルド時にjarファイルのコピーを作成 -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
         <version>1.8</version>
         <executions>
-            <execution>
-              <id>copy-jar</id>
-              <phase>package</phase>
-              <goals>
-                  <goal>run</goal>
-              </goals>
-              <configuration>
-                  <target>
-                      <tstamp/>
-                      <copy file="${project.build.directory}/${project.build.finalName}.jar" 
-                            tofile="work/${project.build.finalName}_${DSTAMP}_${TSTAMP}.jar"/>
-                  </target>
-              </configuration>
-            </execution>
-          </executions>
+          <execution>
+            <id>copy-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <tstamp/>
+                <copy file="${project.build.directory}/${project.build.finalName}.jar" tofile="work/${project.build.finalName}_${DSTAMP}_${TSTAMP}.jar"/>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- clean時にjarファイルが5個以上あると古い順に削除 -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>clean-old-jars</id>
+            <phase>pre-clean</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>bash</executable>
+              <arguments>
+                <argument>/workspaces/java-mysql/demo/src/main/resources/scripts/clean_old_jars.sh</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
     <!-- jar 作成用 END-->
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+
+    <!-- pluginManagementは、ver管理のみに利用。実行して欲しい動作がある場合、外に出す -->
+    <pluginManagement>      <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
-            <configuration>
-              <filesets>
-                  <fileset>
-                      <directory>work/unpacked</directory>
-                      <followSymlinks>false</followSymlinks>
-                  </fileset>
-              </filesets>
-            </configuration>
+          <configuration>
+            <filesets>
+              <fileset>
+                <directory>work/unpacked</directory>
+                <followSymlinks>false</followSymlinks>
+              </fileset>
+            </filesets>
+          </configuration>
         </plugin>
         <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
         <plugin>
