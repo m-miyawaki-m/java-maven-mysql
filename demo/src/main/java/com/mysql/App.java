@@ -3,10 +3,6 @@ package com.mysql;
 import com.mysql.dao.DBConnector;
 import java.sql.SQLException;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args )
