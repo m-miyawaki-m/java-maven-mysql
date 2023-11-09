@@ -1,24 +1,18 @@
 package com.mysql;
 
-import com.mysql.dao.DBConnector;
 import java.sql.SQLException;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
+import com.mysql.service.DBService;
+public class App {
+    public static void main(String[] args) {
+        DBService dbService = new DBService();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            DBConnector.getHistoryList();
-            DBConnector.getHistorySampleDataDTOs();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            dbService.getHistoryAndPrint();
         } catch (ClassNotFoundException e) {
-            System.out.println("MySQL JDBC Driver not found.");
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
