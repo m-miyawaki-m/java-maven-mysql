@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.mysql.dto.SampleDataDTO;
+import com.mysql.model.SampleDataDTO;
 
 public class DBConnector {
     private static String URL;
