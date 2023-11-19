@@ -2,8 +2,6 @@ package com.mysql.logging;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
 //クラスのインスタンスが1つしか存在しないことを保証しつつ、メソッドを非静的に保つために、シングルトンパターンを使用
 public class AppLogger {
     private static final AppLogger instance = new AppLogger();
