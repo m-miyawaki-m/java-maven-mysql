@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.model.SampleDataDTO;
+import com.mysql.model.HistoryDataDTO;
 import java.sql.Statement; // Add this import statement
 
 // HistoryDAO.java
@@ -28,8 +28,8 @@ public class HistoryDAO {
         }
         return history;
     }
-    public static List<SampleDataDTO> getHistorySampleDataDTOs() throws SQLException {
-        List<SampleDataDTO> history = new ArrayList<>();
+    public static List<HistoryDataDTO> getHistorySampleDataDTOs() throws SQLException {
+        List<HistoryDataDTO> history = new ArrayList<>();
         try (Connection connection = DBConnectorMySQL.getConnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery("SELECT * FROM dev_history")) {
@@ -37,7 +37,7 @@ public class HistoryDAO {
             while (resultSet.next()) {
                 int id = resultSet.getInt("No");
                 String sampleInput = resultSet.getString("sampleinput");
-                history.add(new SampleDataDTO(id, sampleInput));
+                history.add(new HistoryDataDTO(id, sampleInput));
                 System.out.println("No:" + id + " sampleInput:" + sampleInput);
             }
             //test用に例外を発生させる

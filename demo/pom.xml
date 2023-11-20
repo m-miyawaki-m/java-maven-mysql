@@ -53,8 +53,9 @@
       <artifactId>logback-classic</artifactId>
       <version>1.2.3</version>
     </dependency>
+    <!-- ログ出力設定 END-->
   </dependencies>
-  <!-- ログ出力設定 END-->
+
 
   <build>
     <plugins>
@@ -153,7 +154,7 @@
             <configuration>
               <executable>bash</executable>
               <arguments>
-                <argument>/workspaces/java-mysql/demo/src/main/resources/scripts/clean_old_jars.sh</argument>
+                <argument>/workspaces/java-maven-mysql/demo/src/main/resources/scripts/clean_old_jars.sh</argument>
               </arguments>
             </configuration>
           </execution>
