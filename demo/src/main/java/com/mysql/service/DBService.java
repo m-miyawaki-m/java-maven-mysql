@@ -22,10 +22,23 @@ public class DBService {
         }
     }
 
-        public void getUsersAndPrint() throws SQLException, ClassNotFoundException {
+    public void getUsersAndPrint() throws SQLException, ClassNotFoundException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            UsersDAO.getHistorySampleDataDTOs();
+            UsersDAO.getUsersDataDTOs();
+        } catch (SQLException e) {
+            logger.logerror("Connection Failed." + e.getMessage());
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            logger.logerror("MySQL JDBC Driver not found." + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void getUsersAndPrintStoredProcedure() throws SQLException, ClassNotFoundException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            UsersDAO.getUsersDataDTOsForStoredProcedure();
         } catch (SQLException e) {
             logger.logerror("Connection Failed." + e.getMessage());
             e.printStackTrace();

@@ -10,6 +10,7 @@ public class App {
         try {
             dbService.getHistoryAndPrint();
             dbService.getUsersAndPrint();
+            dbService.getUsersAndPrintStoredProcedure();
             AppLogger.getInstance().logInfo("Hello World!");
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block

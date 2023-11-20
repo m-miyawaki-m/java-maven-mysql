@@ -27,7 +27,6 @@ public class DBConnectorMySQL {
         }
     }
 
-
     // DBConnector.getConnection() is a static method, so we don't need to create an instance of DBConnector to use it.
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
