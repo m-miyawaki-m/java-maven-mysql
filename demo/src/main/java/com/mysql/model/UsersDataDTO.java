@@ -2,6 +2,7 @@ package com.mysql.model;
 
 import java.sql.Date;
 
+
 public record UsersDataDTO(
     int id,
     String name,
