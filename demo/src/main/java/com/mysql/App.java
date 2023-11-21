@@ -6,8 +6,12 @@ import com.mysql.service.DBService;
 public class App {
     public static void main(String[] args) {
         DBService dbService = new DBService();
+        
         try {
             dbService.getHistoryAndPrint();
+            dbService.getUsersAndPrint();
+            dbService.getUsersAndPrintStoredProcedure();
+            dbService.getStudentsAndPrint();
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
