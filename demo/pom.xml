@@ -36,12 +36,7 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.33</version>
     </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>3.12.4</version>
-      <scope>test</scope>
-    </dependency>
+
     <!-- ログ出力設定 START-->
     <dependency>
       <groupId>org.slf4j</groupId>
