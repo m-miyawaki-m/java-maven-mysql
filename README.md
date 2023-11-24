@@ -1,4 +1,5 @@
 # 
+https://chat.openai.com/share/e258bac9-403e-4b08-ad2c-19a9ef510966
 
 ### ディレクトリ構成
 - ルート`com.mysql`
