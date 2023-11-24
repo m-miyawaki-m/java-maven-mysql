@@ -1,6 +1,8 @@
 # 
 https://chat.openai.com/share/e258bac9-403e-4b08-ad2c-19a9ef510966
 
+https://chat.openai.com/share/5f6396c2-7c06-46ee-9159-88c870c21f9c
+
 ### ディレクトリ構成
 - ルート`com.mysql`
 - `com.mysql.controller`: アプリケーションのコントローラークラスを配置します。これらのクラスはユーザーのリクエストを受け取り、適切なサービスクラスを呼び出し、レスポンスを生成します。
