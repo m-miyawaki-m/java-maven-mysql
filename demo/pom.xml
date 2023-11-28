@@ -153,7 +153,7 @@
             <configuration>
               <executable>bash</executable>
               <arguments>
-                <argument>/workspaces/java-mysql/demo/src/main/resources/scripts/clean_old_jars.sh</argument>
+                <argument>/workspaces/java-maven-mysql/demo/src/main/resources/scripts/clean_old_jars.sh</argument>
               </arguments>
             </configuration>
           </execution>
