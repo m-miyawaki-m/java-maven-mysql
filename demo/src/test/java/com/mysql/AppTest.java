@@ -1,8 +1,8 @@
 package com.mysql;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import org.junit.jupiter.api.Test;
 public class AppTest {
     @Test
     public void testMain() {
@@ -10,3 +10,4 @@ public class AppTest {
         assertDoesNotThrow(() -> App.main(new String[]{}));
     }
 }
+
