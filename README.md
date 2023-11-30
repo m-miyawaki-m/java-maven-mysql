@@ -16,6 +16,15 @@ https://chat.openai.com/share/5f6396c2-7c06-46ee-9159-88c870c21f9c
 ### 開発方針
 メソッド作成する度にテストで確認
 
+### export
+```
+# 開発環境
+export DEVELOP_PATH=/workspaces/java-maven-mysql/demo
+
+# 依存関係確認
+mvn dependency:build-classpath
+```
+
 ### ビルドコマンド
 ```
 # target,work/unzipディレクトリをきれいにする

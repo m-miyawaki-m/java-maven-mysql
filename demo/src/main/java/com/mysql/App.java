@@ -1,19 +1,14 @@
 package com.mysql;
 
-import java.sql.SQLException;
-
-import com.mysql.service.DBService;
+import com.mysql.service.HistoryService;
+import com.mysql.service.UsersService;
 public class App {
     public static void main(String[] args) {
-        DBService dbService = new DBService();
-        try {
-            dbService.getHistoryAndPrint();
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        // UsersService usersService = new UsersService();
+        // usersService.getUsersAndPrint();
+        // usersService.getUsersAndPrintStoredProcedure();
+
+        HistoryService historyService = new HistoryService();
+        historyService.getHistoryAndPrint();
     }
 }

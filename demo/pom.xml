@@ -16,7 +16,22 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <env>${env.ENV}</env> <!-- 環境変数ENVを参照するプロパティ -->
   </properties>
+
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault> <!-- デフォルトでアクティベート -->
+      </activation>
+      <properties>
+        <work.dir>${env.DEVELOP_PATH}</work.dir> <!-- 環境変数DEVELOP_PATHを参照するプロパティ -->
+      </properties>
+      <!-- development environment settings here -->
+    </profile>
+  </profiles>
 
   <dependencies>
     <dependency>
@@ -36,25 +51,21 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.33</version>
     </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>3.12.4</version>
-      <scope>test</scope>
-    </dependency>
+
     <!-- ログ出力設定 START-->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.30</version>
+      <version>1.7.36</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>1.2.3</version>
     </dependency>
+    <!-- ログ出力設定 END-->
   </dependencies>
-  <!-- ログ出力設定 END-->
+
 
   <build>
     <plugins>
@@ -132,7 +143,7 @@
             <configuration>
               <target>
                 <tstamp/>
-                <copy file="${project.build.directory}/${project.build.finalName}.jar" tofile="work/${project.build.finalName}_${DSTAMP}_${TSTAMP}.jar"/>
+                <copy file="${project.build.directory}/${project.build.finalName}.jar" tofile="${work.dir}/work/${project.build.finalName}_${DSTAMP}_${TSTAMP}.jar"/>
               </target>
             </configuration>
           </execution>
@@ -153,7 +164,7 @@
             <configuration>
               <executable>bash</executable>
               <arguments>
-                <argument>/workspaces/java-mysql/demo/src/main/resources/scripts/clean_old_jars.sh</argument>
+                <argument>${work.dir}/src/main/resources/scripts/clean_old_jars.sh</argument>
               </arguments>
             </configuration>
           </execution>
